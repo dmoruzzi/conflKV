@@ -26,7 +26,7 @@ import os  # For managing environment variables
 from conflkv import PageManager
 
 # Initialize the PageManager with your Confluence credentials and page details
-app1_doc_page = PageManager(
+app1_config_page = PageManager(
     page_id="25559043",  # Replace with your Confluence page ID
     server_url=f'https://{os.environ["CONFLUENCE_INSTANCE"]}.atlassian.net',
     auth_username=os.environ["CONFLUENCE_USERNAME"],
@@ -34,25 +34,25 @@ app1_doc_page = PageManager(
 )
 
 # Set up the page with an HTML header and a key-value table
-app1_doc_page.set_html_header(
+app1_config_page.set_html_header(
     header="About",
-    paragraph="This webpage is sample key-value store related to App1.",
-    table_key="Key",
-    table_value="Value",
+    paragraph="This page describes each configuration flag of the App1 application.",
+    table_key="Configuration Flag",
+    table_value="Description",
 )
 
-data = confluence.fetchall()  # Retrieve all key-value pairs as a dictionary
-confluence.replaceall(data)  # Replace all key-value pairs with a new dictionary
+data = app1_config_page.fetchall()  # Retrieve all key-value pairs as a dictionary
+app1_config_page.replaceall(data)  # Replace all key-value pairs with a new dictionary
 
-key_data = confluence.search("key", ok_if_missing=True)  # Search for a key; ignores missing keys if 'ok_if_missing' is True
+key_data = app1_config_page.search("key", ok_if_missing=True)  # Search for a key; ignores missing keys if 'ok_if_missing' is True
 
-confluence.insert("key", "value")  # Insert a new pair; raises an error if the key exists
-confluence.replace("key", "new_value")  # Replace an existing pair; raises an error if the key doesn't exist
-confluence.upsert("key", "value")  # Insert or update a key-value pair
-confluence.delete("key", ok_if_missing=True)  # Delete a key; ignores missing keys if 'ok_if_missing' is True
+app1_config_page.insert("key", "value")  # Insert a new pair; raises an error if the key exists
+app1_config_page.replace("key", "new_value")  # Replace an existing pair; raises an error if the key doesn't exist
+app1_config_page.upsert("key", "value")  # Insert or update a key-value pair
+app1_config_page.delete("key", ok_if_missing=True)  # Delete a key; ignores missing keys if 'ok_if_missing' is True
 
 # Close the connection when done
-confluence.close()
+app1_config_page.close()
 ```
 
 ---
