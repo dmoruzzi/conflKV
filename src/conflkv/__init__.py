@@ -207,7 +207,7 @@ class PageManager:
         if self._html_header:
             html += self._html_header
         html += "<table border='1'>"
-        html += "<tr><th>Key</th><th>Value</th></tr>"
+        html += f"<tr><th>{self._html_table_key}</th><th>{self._html_table_value}</th></tr>"
         for key, value in data_dict.items():
             html += f"<tr><td>{key}</td><td>{value}</td></tr>"
         html += "</table>"

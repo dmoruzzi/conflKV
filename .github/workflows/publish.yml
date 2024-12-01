@@ -27,6 +27,9 @@ jobs:
           version: "latest"
           enable-cache: true
 
+      - name: Sync UV
+        run: uv sync
+
       - name: Build package
         run: uv build
 
